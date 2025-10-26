@@ -1,17 +1,16 @@
 ﻿
-using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
 using UnityEngine.Animations;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Knit.Animator.Simple
+namespace UnityEngine
 {
-	[RequireComponent( typeof( UnityEngine.Animator))]
-	public sealed class SingleAnimator : MonoBehaviour, IAnimationClipSource
+	[RequireComponent( typeof( Animator))]
+	public sealed class AnimatorSingleClip : MonoBehaviour, IAnimationClipSource
 	{
-		public event UnityAction<SingleAnimator> OnDone
+		public event UnityAction<AnimatorSingleClip> OnDone
 		{
 			add{ m_OnDone.AddListener( value); }
 			remove{ m_OnDone.RemoveListener( value); }
@@ -190,7 +189,7 @@ namespace Knit.Animator.Simple
 			Restart,
 		}
 		[System.Serializable]
-		sealed class DoneEvent : UnityEvent<SingleAnimator>{}
+		sealed class DoneEvent : UnityEvent<AnimatorSingleClip>{}
 		[SerializeField]
 		AnimationClip m_Clip;
 		[SerializeField]

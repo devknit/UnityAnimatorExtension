@@ -1,10 +1,10 @@
 ﻿
-using UnityEditor;
+using UnityEngine;
 
-namespace Knit.Animator.Simple.Editor
+namespace UnityEditor
 {
-	[CustomEditor( typeof( SingleAnimator))]
-	sealed class SingleAnimatorEditor : UnityEditor.Editor
+	[CustomEditor( typeof( AnimatorSingleClip))]
+	sealed class AnimatorSingleClipEditor : Editor
 	{
 		void OnEnable()
 		{
