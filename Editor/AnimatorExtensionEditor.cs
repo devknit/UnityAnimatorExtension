@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
+using System.Linq;
 
 namespace UnityEditor
 {
@@ -39,11 +40,17 @@ namespace UnityEditor
 				foreach( string assetGUID in assetGUIDs)
 				{
 					string assetPath = AssetDatabase.GUIDToAssetPath( assetGUID);
-					AnimationClip clip = AssetDatabase.LoadAssetAtPath<AnimationClip>( assetPath);
-					if( clip != null)
+					Object[] assets = AssetDatabase.LoadAllAssetsAtPath( assetPath);
+					if( (assets?.Length ?? 0) > 0)
 					{
-						AnimationUtility.SetAnimationEvents( clip, System.Array.Empty<AnimationEvent>());
-						EditorUtility.SetDirty( clip);
+						foreach( var clip in assets.OfType<AnimationClip>())
+						{
+							if( (clip?.events.Length ?? 0) > 0)
+							{
+								AnimationUtility.SetAnimationEvents( clip, System.Array.Empty<AnimationEvent>());
+								EditorUtility.SetDirty( clip);
+							}
+						}
 					}
 				}
 				if( save != false)
