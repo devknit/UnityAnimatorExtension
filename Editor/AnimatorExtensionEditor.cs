@@ -42,7 +42,8 @@ namespace UnityEditor
 					AnimationClip clip = AssetDatabase.LoadAssetAtPath<AnimationClip>( assetPath);
 					if( clip != null)
 					{
-						clip.ClearAnimationEvent();
+						AnimationUtility.SetAnimationEvents( clip, System.Array.Empty<AnimationEvent>());
+						EditorUtility.SetDirty( clip);
 					}
 				}
 				if( save != false)
